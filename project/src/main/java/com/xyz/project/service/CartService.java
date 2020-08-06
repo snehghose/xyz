@@ -2,6 +2,7 @@ package com.xyz.project.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,17 +35,11 @@ public class CartService {
 		Product product;
 		try {
 			product = productRepository.findById(productId).orElseThrow(() -> new Exception("Product not found"));
-			cartRepository.findAll().forEach((item) -> {
-				if(item.getProduct().getId()==productId) {
-					final CartItem cart=item;
-					cartRepository.deleteById(cart.getId());
-					cart.setQuantity(cart.getQuantity()+1);
-					cartRepository.save(cart);
-					return;
-				}
-			});
-			CartItem cart=new CartItem(product, 1);
-			cartRepository.save(cart);
+			Optional<CartItem> check=cartRepository.findById(product.getId());
+			CartItem item=check.orElse(new CartItem(product.getId(),product,0));
+			check.ifPresent(cartItem -> cartRepository.deleteById(cartItem.getId()));
+			item.setQuantity(item.getQuantity()+1);
+			cartRepository.save(item);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

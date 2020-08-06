@@ -4,7 +4,7 @@ class CartService {
     async getCart() {
         const response=await fetch(URL);
         if(response.status===200)
-        return await response.json();
+            return await response.json();
         else {
             alert("Cannot fetch. Please reload.");
             window.location.reload(false)
@@ -13,22 +13,22 @@ class CartService {
 
     async addToCart(productId) {
         const response = await fetch(URL+`/add/${productId}`, {
-            method='PUT'
+            method:'PUT'
         });
         if(response.status===200)
-        return true;
+            return true;
         else {
-            alert("Item not added to cart. Please reload.");
+            alert("Item not added to cart. Please try again.");
             window.location.reload(false)
         }
     }
 
     async deleteFromCart(productId) {
         const response = await fetch(URL+`/delete/${productId}`, {
-            method='DELETE'
+            method:'DELETE'
         });
         if(response.status!==200)
-        alert("Item not added to cart. Please reload.");
+            alert("Item not deleted from cart. Please try again.");
         window.location.reload(false);
     }
 }

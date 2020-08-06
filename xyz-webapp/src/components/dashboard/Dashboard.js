@@ -5,9 +5,8 @@ class Dashboard extends Component {
     render() {
         return (
             <>
-            <div className="jumbotron jumbotron-fluid">
-            </div>
-            <Products/>
+                <div className="jumbotron jumbotron-fluid"></div>
+                <Products/>
             </>
         )
     }

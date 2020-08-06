@@ -19,7 +19,7 @@ class Products extends Component{
             <div className="container">
                 <div className="row mb-2">
                     {this.state.products.map((product)=>(
-                        <div className="col-12 col-sm-6 col-md-4">
+                        <div className="col-12 col-sm-6 col-lg-4">
                             <Product key={product.id} product={product}/>
                         </div>
                     ))}
