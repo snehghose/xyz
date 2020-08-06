@@ -1,0 +1,27 @@
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.jumbotron {
+    background-image: url("./images/pic.jpg");
+    background-size: cover;
+    height: 15em;
+}
+
+.size {
+    font-size: 25px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+}

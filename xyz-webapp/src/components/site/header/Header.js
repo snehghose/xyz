@@ -1,0 +1,28 @@
+import React, {Component} from 'react';
+import '../../App.css'
+
+class Header extends Component {
+    render() {
+        return (
+            <nav className="navbar header navbar-light navbar-expand-sm bg-danger">
+                <div className="nav-item"><a className="nav-link text-light"><h3>Fruit Corner</h3></a></div>
+                <button className="navbar-toggler" data-toggle="collapse" data-target="#navcontent">
+                    <span className="navbar-toggler-icon"/>
+                </button>
+                <div className="collapse navbar-collapse" id="navcontent">
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <a className="nav-link text-light">Menu</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-light">Cart</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </nav>
+        )
+    }
+}
+
+export default Header;

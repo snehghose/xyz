@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xyz.project.model.Cart;
+import com.xyz.project.model.CartItem;
 import com.xyz.project.model.Product;
 import com.xyz.project.repository.CartRepository;
 import com.xyz.project.repository.ProductRepository;
@@ -19,10 +20,14 @@ public class CartService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	public List<Cart> getCart() {
-		final List<Cart> cart=new ArrayList<>();
-		cartRepository.findAll().forEach(item -> cart.add(item));
-		return cart;
+	public Cart getCart() {
+		List<CartItem> cartItems=new ArrayList<>();
+		double total=0.0;
+		for(CartItem item:cartRepository.findAll()) {
+			cartItems.add(item);
+			total+=item.getProduct().getPrice()*item.getQuantity();
+		}
+		return new Cart(cartItems, total);
 	}
 	
 	public void addToCart(int productId){
@@ -31,14 +36,14 @@ public class CartService {
 			product = productRepository.findById(productId).orElseThrow(() -> new Exception("Product not found"));
 			cartRepository.findAll().forEach((item) -> {
 				if(item.getProduct().getId()==productId) {
-					final Cart cart=item;
+					final CartItem cart=item;
 					cartRepository.deleteById(cart.getId());
 					cart.setQuantity(cart.getQuantity()+1);
 					cartRepository.save(cart);
 					return;
 				}
 			});
-			Cart cart=new Cart(product, 1);
+			CartItem cart=new CartItem(product, 1);
 			cartRepository.save(cart);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +51,7 @@ public class CartService {
 	}
 	
 	public void deleteFromCart(int id) {
-		Cart cart;
+		CartItem cart;
 		try {
 			cart = cartRepository.findById(id).orElseThrow(()->new Exception("Cart Item not found"));
 			cartRepository.deleteById(id);

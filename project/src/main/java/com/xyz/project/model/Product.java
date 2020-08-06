@@ -20,19 +20,19 @@ public class Product {
 	private double price;
 	@Column(name = "pr_image")
 	private String imageUrl;
-	@Column(name = "pr_category")
-	private String category;
+	@Column(name = "pr_quantity_type")
+	private String quantityType;
 	
 	public Product() {
 		super();
 	}
 	
-	public Product(String name, double price, String imageUrl, String category) {
+	public Product(String name, double price, String imageUrl, String quantityType) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.imageUrl = imageUrl;
-		this.category = category;
+		this.quantityType = quantityType;
 	}
 
 	public int getId() {
@@ -67,12 +67,12 @@ public class Product {
 		this.imageUrl = imageUrl;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getQuantityType() {
+		return quantityType;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setQuantityType(String quantityType) {
+		this.quantityType = quantityType;
 	}
 	
 	
